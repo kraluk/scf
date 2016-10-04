@@ -1,8 +1,6 @@
 package com.kraluk.scf.server.conf;
 
-import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.guava.GuavaCacheManager;
@@ -28,26 +26,8 @@ public class CacheConfiguration {
             .maximumSize(100)
             .expireAfterWrite(10, TimeUnit.MINUTES);
 
-
-
         cacheManager.setCacheBuilder(cacheBuilder);
 
         return cacheManager;
-    }
-
-    @Bean
-    public Cache<String, String> testCache() {
-        CacheLoader<String, String> loader = new CacheLoader<String, String>() {
-            public String load(String key) throws Exception {
-                return "test";
-            }
-        };
-
-        return CacheBuilder.newBuilder()
-            .expireAfterWrite(2, TimeUnit.MINUTES)
-            .weakKeys()
-            .initialCapacity(10)
-            .recordStats()
-            .build(loader);
     }
 }
