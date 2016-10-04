@@ -12,5 +12,4 @@ public class ScfApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }
