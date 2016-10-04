@@ -1,0 +1,60 @@
+buildscript {
+
+    dependencies {
+        classpath group: 'pl.allegro.tech.build', name: 'axion-release-plugin', version: '1.4.0'
+    }
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+ext {
+    springBootVersion = "1.4.0.RELEASE"
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'idea'
+    apply plugin: 'jacoco'
+    apply plugin: 'pl.allegro.tech.build.axion-release'
+
+    group = 'com.kraluk.scf'
+    project.version = scmVersion.version
+
+    scmVersion {
+        tag {
+            prefix = 'scf'
+        }
+    }
+
+    buildscript {
+
+        repositories {
+            jcenter()
+            mavenCentral()
+        }
+    }
+}
+
+subprojects {
+
+    apply plugin: "java"
+    apply plugin: "idea"
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        jcenter()
+
+        mavenLocal()
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}

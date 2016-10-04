@@ -1,0 +1,43 @@
+buildscript {
+
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.4.1.RELEASE'
+    }
+}
+
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'scf'
+
+    manifest {
+        attributes("Specification-Title": "scf",
+                "Specification-Version": scmVersion.version,
+                "Implementation-Title": "scf",
+                "Implementation-Version": scmVersion.version)
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled = true
+    }
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache'
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
