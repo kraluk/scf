@@ -1,5 +1,7 @@
 # Common
 *.class
+log/
+*.log
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -26,7 +28,6 @@ hs_err_pid*
 .DS_Store
 
 # Maven specifics
-log/
 target/
 
 # Gradle specifics
