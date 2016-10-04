@@ -1,4 +1,4 @@
-package com.kraluk.scf;
+package com.kraluk.scf.server;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
