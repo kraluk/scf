@@ -19,7 +19,7 @@ public class FacadeControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void shouldGet404() throws Exception {
+    public void shouldGet404Test() throws Exception {
         mockMvc.perform(get("/")
             .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
             .andExpect(status().isNotFound());

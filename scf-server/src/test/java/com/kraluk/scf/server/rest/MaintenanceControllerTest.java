@@ -20,7 +20,7 @@ public class MaintenanceControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testPing() throws Exception {
+    public void pingTest() throws Exception {
         mockMvc.perform(get("/maintenance/ping")
             .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
             .andExpect(status().isOk())

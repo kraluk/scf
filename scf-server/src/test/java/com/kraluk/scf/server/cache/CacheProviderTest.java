@@ -19,6 +19,7 @@ public class CacheProviderTest {
     @Test
     public void thereAreAvailableCachesTest() {
         int size = cacheProvider.getAvailableCaches().size();
+
         assertTrue(size > 0);
     }
 
