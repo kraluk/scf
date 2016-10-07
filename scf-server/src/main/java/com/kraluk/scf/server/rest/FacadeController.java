@@ -1,5 +1,6 @@
 package com.kraluk.scf.server.rest;
 
+import com.kraluk.scf.server.mail.MailSender;
 import com.kraluk.scf.server.mail.RealMailSender;
 import com.kraluk.scf.server.model.BaseResponse;
 import com.kraluk.scf.server.model.enums.OperationStatus;
@@ -28,7 +29,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Slf4j
 public class FacadeController {
 
-    private final RealMailSender mailSender;
+    private final MailSender mailSender;
     private final SmsService smsService;
 
     @Autowired
@@ -57,7 +58,6 @@ public class FacadeController {
     @RequestMapping(value = "/sms/{to}/{message}", method = GET)
     public ResponseEntity<BaseResponse> sendSms(@PathVariable("to") String to,
                                                 @PathVariable("message") String message) {
-
         BaseResponse response;
 
         if (!PhoneNumberValidator.validate(to)) {
