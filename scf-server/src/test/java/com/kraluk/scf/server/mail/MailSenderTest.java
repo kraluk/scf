@@ -10,13 +10,13 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MailServiceTest {
+public class MailSenderTest {
 
     @Autowired
-    private MailService mailService;
+    private MailSender mailSender;
 
-    @Test
-    public void dummyTest() {
-        assertTrue(mailService != null);
+    @Test(expected = UnsupportedOperationException.class)
+    public void shouldNotSendMail() {
+        mailSender.send("", "", "");
     }
 }

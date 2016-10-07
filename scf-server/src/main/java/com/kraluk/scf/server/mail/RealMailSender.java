@@ -13,12 +13,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class MailService {
+public class RealMailSender implements MailSender {
 
     private final JavaMailSender mailSender;
 
     @Autowired
-    public MailService(JavaMailSender mailSender) {
+    public RealMailSender(JavaMailSender mailSender) {
         this.mailSender = mailSender;
+    }
+
+    @Override
+    public void send(String to, String subject, String content) {
+        throw new UnsupportedOperationException("Method not implemented!");
     }
 }

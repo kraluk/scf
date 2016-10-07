@@ -45,6 +45,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
 
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
     optional group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'

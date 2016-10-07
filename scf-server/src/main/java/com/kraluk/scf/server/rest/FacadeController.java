@@ -1,6 +1,6 @@
 package com.kraluk.scf.server.rest;
 
-import com.kraluk.scf.server.mail.MailService;
+import com.kraluk.scf.server.mail.RealMailSender;
 import com.kraluk.scf.server.model.BaseResponse;
 import com.kraluk.scf.server.model.enums.OperationStatus;
 import com.kraluk.scf.server.sms.SmsService;
@@ -28,12 +28,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Slf4j
 public class FacadeController {
 
-    private final MailService mailService;
+    private final RealMailSender mailSender;
     private final SmsService smsService;
 
     @Autowired
-    public FacadeController(MailService mailService, SmsService smsService) {
-        this.mailService = mailService;
+    public FacadeController(RealMailSender mailSender, SmsService smsService) {
+        this.mailSender = mailSender;
         this.smsService = smsService;
     }
 
