@@ -2,6 +2,8 @@ package com.kraluk.scf.server.test.base;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.kraluk.scf.server.core.filter.RateLimiterFilter;
+import com.kraluk.scf.server.mail.MailService;
+import com.kraluk.scf.server.sms.SmsService;
 
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +29,12 @@ public abstract class BaseControllerTest {
     @MockBean
     @Qualifier("rateLimiterCache")
     protected Map<String, RateLimiter> rateLimiterCache;
+
+    @MockBean
+    protected MailService mailService;
+
+    @MockBean
+    protected SmsService smsService;
 
     @Before
     public void setUp() {
