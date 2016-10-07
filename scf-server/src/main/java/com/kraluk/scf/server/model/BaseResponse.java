@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class RestResponse {
+public class BaseResponse {
 
     private OperationStatus status;
 

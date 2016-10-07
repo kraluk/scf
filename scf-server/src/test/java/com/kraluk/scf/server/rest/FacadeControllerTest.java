@@ -28,20 +28,40 @@ public class FacadeControllerTest extends BaseControllerTest {
     @Test
     public void sendMailTest() throws Exception {
         mockMvc.perform(get("/mail/test@test.pl/Hello")
-            .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+            .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(content().contentType(EXPECTED_CONTENT_TYPE))
             .andExpect(jsonPath("$.status", is(OperationStatus.SUCCESS.name())))
             .andExpect(jsonPath("$.message", containsString("sended")));
     }
 
     @Test
+    public void shouldNotSendMailTest() throws Exception {
+        mockMvc.perform(get("/mail/test@test/Hello")
+            .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentType(EXPECTED_CONTENT_TYPE))
+            .andExpect(jsonPath("$.status", is(OperationStatus.ERROR.name())))
+            .andExpect(jsonPath("$.message", containsString("Not proper format")));
+    }
+
+    @Test
     public void sendSmsTest() throws Exception {
         mockMvc.perform(get("/sms/500100200/Hello")
-            .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+            .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(content().contentType(EXPECTED_CONTENT_TYPE))
             .andExpect(jsonPath("$.status", is(OperationStatus.SUCCESS.name())))
             .andExpect(jsonPath("$.message", containsString("sended")));
+    }
+
+    @Test
+    public void shouldNotSendSmsTest() throws Exception {
+        mockMvc.perform(get("/sms/222/Hello")
+            .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentType(EXPECTED_CONTENT_TYPE))
+            .andExpect(jsonPath("$.status", is(OperationStatus.ERROR.name())))
+            .andExpect(jsonPath("$.message", containsString("Not proper format")));
     }
 }

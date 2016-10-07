@@ -24,8 +24,8 @@ public class MaintenanceControllerTest extends BaseControllerTest {
     @Test
     public void pingTest() throws Exception {
         mockMvc.perform(get("/maintenance/ping")
-            .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+            .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json;charset=UTF-8"));
+            .andExpect(content().contentType(EXPECTED_CONTENT_TYPE));
     }
 }
