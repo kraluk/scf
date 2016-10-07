@@ -1,4 +1,4 @@
-package com.kraluk.scf.server.filter;
+package com.kraluk.scf.server.core.filter;
 
 import org.junit.Before;
 import org.junit.Test;

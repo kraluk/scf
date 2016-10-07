@@ -1,13 +1,24 @@
 buildscript {
 
+    repositories {
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+
     dependencies {
         classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.4.1.RELEASE'
+        classpath group: 'org.springframework.build.gradle', name: 'propdeps-plugin', version: '0.0.7'
+
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'spring-boot'
+
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-maven'
+apply plugin: 'propdeps-idea'
+apply plugin: 'propdeps-eclipse'
 
 jar {
     baseName = 'scf'
@@ -36,6 +47,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache'
 
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+    optional group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
 
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
 
@@ -43,3 +55,5 @@ dependencies {
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 }
+
+compileJava.dependsOn(processResources)

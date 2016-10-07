@@ -1,4 +1,4 @@
-package com.kraluk.scf.server.service;
+package com.kraluk.scf.server.sms;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,13 +10,13 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MailServiceTest {
+public class SmsServiceTest {
 
     @Autowired
-    private MailService mailService;
+    private SmsService smsService;
 
     @Test
     public void dummyTest() {
-        assertTrue(mailService != null);
+        assertTrue(smsService != null);
     }
 }

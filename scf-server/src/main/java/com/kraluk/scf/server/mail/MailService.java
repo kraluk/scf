@@ -1,4 +1,4 @@
-package com.kraluk.scf.server.service;
+package com.kraluk.scf.server.mail;
 
 import lombok.extern.slf4j.Slf4j;
 

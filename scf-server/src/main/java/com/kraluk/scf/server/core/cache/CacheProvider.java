@@ -1,6 +1,6 @@
-package com.kraluk.scf.server.cache;
+package com.kraluk.scf.server.core.cache;
 
-import com.kraluk.scf.server.conf.CacheConfiguration;
+import com.kraluk.scf.server.core.cache.conf.CacheConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;

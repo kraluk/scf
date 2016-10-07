@@ -1,4 +1,4 @@
-package com.kraluk.scf.server.conf;
+package com.kraluk.scf.server.core.cache.conf;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.util.concurrent.RateLimiter;

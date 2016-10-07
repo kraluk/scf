@@ -1,4 +1,4 @@
-package com.kraluk.scf.server.cache;
+package com.kraluk.scf.server.core.cache;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
