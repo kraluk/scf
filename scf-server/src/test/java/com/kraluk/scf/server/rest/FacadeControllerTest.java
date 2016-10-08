@@ -36,6 +36,16 @@ public class FacadeControllerTest extends BaseControllerTest {
     }
 
     @Test
+    public void sendMailWithLongMessageTest() throws Exception {
+        mockMvc.perform(get("/mail/test@test.pl/\'very long message...\'")
+            .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(EXPECTED_CONTENT_TYPE))
+            .andExpect(jsonPath("$.status", is(OperationStatus.SUCCESS.name())))
+            .andExpect(jsonPath("$.message", containsString("sended")));
+    }
+
+    @Test
     public void shouldNotSendMailTest() throws Exception {
         mockMvc.perform(get("/mail/test@test/Hello")
             .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))

@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebFilter(urlPatterns = "/*")
 @Slf4j
 public class RateLimiterFilter implements Filter {
+    private static final int RATE_LIMIT = 1;
 
     private final Map<String, RateLimiter> cache;
 
@@ -53,7 +54,7 @@ public class RateLimiterFilter implements Filter {
         String userIp = request.getRemoteAddr();
 
         if (!cache.containsKey(userIp)) {
-            cache.put(userIp, RateLimiter.create(1));
+            cache.put(userIp, RateLimiter.create(RATE_LIMIT));
             log.debug("Created RateLimiter for user '{}'.", userIp);
         }
 

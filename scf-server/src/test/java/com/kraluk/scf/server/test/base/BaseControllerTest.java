@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
  * @see org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
  */
 public abstract class BaseControllerTest {
-    private static final int DEFAULT_RATE_LIMIT = 100;
+    private static final int DEFAULT_TEST_RATE_LIMIT = 100;
 
     public static final String EXPECTED_CONTENT_TYPE = "application/json;charset=UTF-8";
 
@@ -41,6 +41,6 @@ public abstract class BaseControllerTest {
     @Before
     public void setUp() {
         when(rateLimiterCache.get(any(String.class)))
-            .thenReturn(RateLimiter.create(DEFAULT_RATE_LIMIT));
+            .thenReturn(RateLimiter.create(DEFAULT_TEST_RATE_LIMIT));
     }
 }
