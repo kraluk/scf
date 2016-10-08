@@ -1,5 +1,7 @@
 package com.kraluk.scf.server.mail;
 
+import com.google.common.base.Strings;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,19 @@ public class MailContentProducerTest {
     private MailContentProducer producer;
 
     @Test
-    public void dummyTest() {
-        assertTrue(producer != null);
+    public void shouldProduceNotEmptyContentTest() {
+        String content = producer.getContent("", "");
+
+        assertTrue(!Strings.isNullOrEmpty(content));
+    }
+
+    @Test
+    public void shouldProduceFilledContentTest() {
+        final String user = "test";
+        final String message = "Hello World!";
+
+        String content = producer.getContent(user, message);
+
+        assertTrue(content.contains(user) && content.contains(message));
     }
 }

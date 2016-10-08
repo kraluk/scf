@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 /**
  * Produces a shiny HTML mail content using Thymeleaf template engine.
@@ -18,6 +19,22 @@ import org.thymeleaf.TemplateEngine;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class MailContentProducer {
+    private static final String TEMPLATE_NAME = "mailTemplate";
 
     private final TemplateEngine templateEngine;
+
+    public String getContent(String user, String message) {
+        Context context = new Context();
+        context.setVariable(Variable.USER, user);
+        context.setVariable(Variable.MESSAGE, message);
+
+        String content = templateEngine.process(TEMPLATE_NAME, context);
+
+        return content;
+    }
+
+    private static class Variable {
+        public static final String USER = "user";
+        public static final String MESSAGE = "message";
+    }
 }
