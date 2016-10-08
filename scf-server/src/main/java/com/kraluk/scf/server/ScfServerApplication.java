@@ -18,6 +18,6 @@ public class ScfServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ScfServerApplication.class, args);
-        log.debug("Application initialized.");
+        log.info("Simple Communication Facade '{}' initialized.");
     }
 }

@@ -2,12 +2,14 @@ buildscript {
 
     repositories {
         maven { url 'http://repo.spring.io/plugins-release' }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
         classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.4.1.RELEASE'
         classpath group: 'org.springframework.build.gradle', name: 'propdeps-plugin', version: '0.0.7'
 
+        classpath group: 'gradle.plugin.de.fuerstenau', name: 'BuildConfigPlugin', version: '1.1.7'
     }
 }
 
@@ -18,7 +20,8 @@ apply plugin: 'spring-boot'
 apply plugin: 'propdeps'
 apply plugin: 'propdeps-maven'
 apply plugin: 'propdeps-idea'
-apply plugin: 'propdeps-eclipse'
+
+apply plugin: 'de.fuerstenau.buildconfig'
 
 jar {
     baseName = 'scf'
@@ -36,6 +39,12 @@ jacocoTestReport {
         xml.enabled true
         html.enabled = true
     }
+}
+
+buildConfig {
+    appName = 'scf'
+    packageName = 'com.kraluk.scf.server.util'
+    clsName = 'Version'
 }
 
 dependencies {

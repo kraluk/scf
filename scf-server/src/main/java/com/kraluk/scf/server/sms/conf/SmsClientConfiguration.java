@@ -18,7 +18,8 @@ public class SmsClientConfiguration {
 
     @Bean
     @Qualifier("smsClient")
-    public RestTemplate restTemplate(RestTemplateBuilder builder, SmsClientProperties smsClientProperties) {
+    public RestTemplate restTemplate(RestTemplateBuilder builder,
+                                     SmsClientProperties smsClientProperties) {
         return builder.build();
     }
 }
