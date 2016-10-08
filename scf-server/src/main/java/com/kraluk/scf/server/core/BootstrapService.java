@@ -1,5 +1,6 @@
 package com.kraluk.scf.server.core;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -15,15 +16,11 @@ import java.util.Arrays;
  * @author lukasz
  */
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 class BootstrapService implements InitializingBean {
 
     private final Environment environment;
-
-    @Autowired
-    public BootstrapService(Environment environment) {
-        this.environment = environment;
-    }
 
     @Override
     public void afterPropertiesSet() throws Exception {

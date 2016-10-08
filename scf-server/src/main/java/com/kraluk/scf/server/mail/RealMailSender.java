@@ -1,5 +1,6 @@
 package com.kraluk.scf.server.mail;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +13,11 @@ import org.springframework.stereotype.Service;
  * @author lukasz
  */
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class RealMailSender implements MailSender {
 
     private final JavaMailSender mailSender;
-
-    @Autowired
-    public RealMailSender(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
 
     @Override
     public void send(String to, String subject, String content) {

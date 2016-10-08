@@ -54,6 +54,6 @@ public class RateLimiterFilterTest {
         }
 
         verify(response, times(invocations - 1)).sendError(HttpStatus.TOO_MANY_REQUESTS.value(),
-            "Rate limitation is provided! Allowed is 1 operation per second!");
+            "Requests rate limit is provided! Allowed is only *1* operation per *1* second!");
     }
 }

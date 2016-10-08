@@ -62,10 +62,10 @@ public class RateLimiterFilter implements Filter {
         if (limiter.tryAcquire()) {
             chain.doFilter(request, response);
         } else {
-            log.warn("User '{}' reached rate limitation!", userIp);
+            log.warn("User '{}' reached requests rate limit!", userIp);
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.sendError(HttpStatus.TOO_MANY_REQUESTS.value(),
-                "Rate limitation is provided! Allowed is 1 operation per second!");
+                "Requests rate limit is provided! Allowed is only *1* operation per *1* second!");
         }
     }
 
