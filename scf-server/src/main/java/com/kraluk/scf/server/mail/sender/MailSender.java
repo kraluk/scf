@@ -1,4 +1,4 @@
-package com.kraluk.scf.server.mail;
+package com.kraluk.scf.server.mail.sender;
 
 /**
  * Interface for any kind of Mail Sender used in the application

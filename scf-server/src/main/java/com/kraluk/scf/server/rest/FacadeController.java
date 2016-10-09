@@ -1,6 +1,6 @@
 package com.kraluk.scf.server.rest;
 
-import com.kraluk.scf.server.mail.MailSender;
+import com.kraluk.scf.server.mail.sender.MailSender;
 import com.kraluk.scf.server.model.BaseResponse;
 import com.kraluk.scf.server.model.enums.OperationStatus;
 import com.kraluk.scf.server.sms.SmsService;
