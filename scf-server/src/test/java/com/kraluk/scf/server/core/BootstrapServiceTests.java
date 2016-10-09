@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BootstrapServiceTest {
+public class BootstrapServiceTests {
 
     @Autowired
     private BootstrapService bootstrapService;

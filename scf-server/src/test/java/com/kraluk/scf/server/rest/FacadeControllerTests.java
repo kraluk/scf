@@ -1,7 +1,7 @@
 package com.kraluk.scf.server.rest;
 
 import com.kraluk.scf.server.model.enums.OperationStatus;
-import com.kraluk.scf.server.test.base.BaseControllerTest;
+import com.kraluk.scf.server.test.base.BaseControllerTests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(FacadeController.class)
-public class FacadeControllerTest extends BaseControllerTest {
+public class FacadeControllerTests extends BaseControllerTests {
 
     @Autowired
     private MockMvc mockMvc;

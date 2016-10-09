@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
  * @see RateLimiterFilter
  * @see org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
  */
-public abstract class BaseControllerTest {
+public abstract class BaseControllerTests {
     public static final String EXPECTED_CONTENT_TYPE = "application/json;charset=UTF-8";
 
     private static final int DEFAULT_TEST_RATE_LIMIT = 100;

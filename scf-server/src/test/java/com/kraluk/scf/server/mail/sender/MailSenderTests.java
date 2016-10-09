@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles(ApplicationProfile.TEST)
-public class MailSenderTest {
+public class MailSenderTests {
 
     @Autowired
     private MailSender mailSender;

@@ -1,6 +1,6 @@
 package com.kraluk.scf.server.rest;
 
-import com.kraluk.scf.server.test.base.BaseControllerTest;
+import com.kraluk.scf.server.test.base.BaseControllerTests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(MaintenanceController.class)
-public class MaintenanceControllerTest extends BaseControllerTest {
+public class MaintenanceControllerTests extends BaseControllerTests {
 
     @Autowired
     private MockMvc mockMvc;

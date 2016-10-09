@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CacheProviderTest {
+public class CacheProviderTests {
 
     @Autowired
     private CacheProvider cacheProvider;
