@@ -17,7 +17,7 @@ public class BootstrapServiceTests {
     private BootstrapService bootstrapService;
 
     @Test
-    public void shouldInvokeAfterPropertiesSetTest() throws Exception {
+    public void afterPropertiesSet_invoked() throws Exception {
         BootstrapService spied = spy(bootstrapService);
 
         spied.afterPropertiesSet();

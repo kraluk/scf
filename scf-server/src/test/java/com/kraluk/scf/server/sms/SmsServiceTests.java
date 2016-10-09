@@ -16,7 +16,7 @@ public class SmsServiceTests {
     private SmsService smsService;
 
     @Test
-    public void dummyTest() {
+    public void dummy() {
         assertTrue(smsService != null);
     }
 }

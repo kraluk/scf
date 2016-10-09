@@ -19,14 +19,14 @@ public class MailContentProducerTests {
     private MailContentProducer producer;
 
     @Test
-    public void shouldProduceNotEmptyContentTest() {
+    public void getContent_emptyValues_produced() {
         String content = producer.getContent("", "");
 
         assertFalse(Strings.isNullOrEmpty(content));
     }
 
     @Test
-    public void shouldProduceFilledContentTest() {
+    public void getContent_dummyValues_produced() {
         final String user = "test";
         final String message = "Hello World!";
 

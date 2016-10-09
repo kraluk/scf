@@ -34,7 +34,7 @@ public class RateLimiterFilterTests {
     }
 
     @Test
-    public void doFilterTest() throws IOException, ServletException {
+    public void doFilter_singleRequest_notFiltered() throws IOException, ServletException {
 
         RateLimiterFilter filter = new RateLimiterFilter(new HashMap<>());
 
@@ -44,7 +44,7 @@ public class RateLimiterFilterTests {
     }
 
     @Test
-    public void doFilterRateLimitTest() throws IOException, ServletException {
+    public void doFilter_multipleRequests_filtered() throws IOException, ServletException {
         final int invocations = 10;
 
         RateLimiterFilter filter = new RateLimiterFilter(new HashMap<>());
