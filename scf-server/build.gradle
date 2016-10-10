@@ -9,7 +9,7 @@ buildscript {
         classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.4.1.RELEASE'
         classpath group: 'org.springframework.build.gradle', name: 'propdeps-plugin', version: '0.0.7'
 
-        classpath group: 'gradle.plugin.de.fuerstenau', name: 'BuildConfigPlugin', version: '1.1.7'
+        classpath group: 'gradle.plugin.de.fuerstenau', name: 'BuildConfigPlugin', version: '1.1.4'
     }
 }
 
@@ -42,7 +42,9 @@ jacocoTestReport {
 }
 
 buildConfig {
-    appName = 'scf'
+    appName = project.name
+    version = project.version
+
     packageName = 'com.kraluk.scf.server.util'
     clsName = 'Version'
 }

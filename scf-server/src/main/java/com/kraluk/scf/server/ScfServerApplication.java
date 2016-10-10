@@ -1,5 +1,7 @@
 package com.kraluk.scf.server;
 
+import com.kraluk.scf.server.util.Version;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.boot.SpringApplication;
@@ -18,6 +20,6 @@ public class ScfServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ScfServerApplication.class, args);
-        log.info("Simple Communication Facade '{}' initialized.");
+        log.info("Simple Communication Facade '{}' initialized.", Version.VERSION);
     }
 }
