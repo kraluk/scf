@@ -26,7 +26,7 @@ public class FacadeControllerTests extends BaseControllerTests {
     private MockMvc mockMvc;
 
     @Test
-    public void mail_simpleParameters_invokedAndGot200() throws Exception {
+    public void testMailWithSimpleParametersAndGet200() throws Exception {
         mockMvc.perform(get("/mail/test@test.pl/Hello")
             .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isOk())
@@ -36,7 +36,7 @@ public class FacadeControllerTests extends BaseControllerTests {
     }
 
     @Test
-    public void mail_longMessage_invokedAndGot200() throws Exception {
+    public void testMailWithLongMessageAndGet200() throws Exception {
         mockMvc.perform(get("/mail/test@test.pl/\'very long message...\'")
             .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isOk())
@@ -46,7 +46,7 @@ public class FacadeControllerTests extends BaseControllerTests {
     }
 
     @Test
-    public void mail_incorrectAddress_invokedAndGot400() throws Exception {
+    public void testMailWithIncorrectAddressAndGet400() throws Exception {
         mockMvc.perform(get("/mail/test@test/Hello")
             .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isBadRequest())
@@ -56,7 +56,7 @@ public class FacadeControllerTests extends BaseControllerTests {
     }
 
     @Test
-    public void sms_simpleParameters_invokedAndGot200() throws Exception {
+    public void testSmsWithSimpleParametersAndGet200() throws Exception {
         mockMvc.perform(get("/sms/500100200/Hello")
             .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isOk())
@@ -66,7 +66,7 @@ public class FacadeControllerTests extends BaseControllerTests {
     }
 
     @Test
-    public void sms_incorrectNumber_invokedAndGot400() throws Exception {
+    public void testSmsWithIncorrectNumberAndGet400() throws Exception {
         mockMvc.perform(get("/sms/222/Hello")
             .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isBadRequest())

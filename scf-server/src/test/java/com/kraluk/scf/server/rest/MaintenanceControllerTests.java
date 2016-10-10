@@ -22,7 +22,7 @@ public class MaintenanceControllerTests extends BaseControllerTests {
     private MockMvc mockMvc;
 
     @Test
-    public void ping_invokedAndGot200() throws Exception {
+    public void testPingAndGet200() throws Exception {
         mockMvc.perform(get("/maintenance/ping")
             .accept(MediaType.parseMediaType(EXPECTED_CONTENT_TYPE)))
             .andExpect(status().isOk())

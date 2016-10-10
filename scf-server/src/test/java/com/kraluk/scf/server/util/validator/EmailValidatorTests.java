@@ -8,14 +8,14 @@ import static org.junit.Assert.assertTrue;
 public class EmailValidatorTests {
 
     @Test
-    public void validate_correctAddress_validated() {
+    public void testValidateWithCorrectAddress() {
         boolean result = EmailValidator.validate("test@test.pl");
 
         assertTrue(result);
     }
 
     @Test
-    public void validate_incorrectAddress_notValidated() {
+    public void testValidateWithIncorrectAddress() {
         boolean result = EmailValidator.validate("test@test");
 
         assertFalse(result);

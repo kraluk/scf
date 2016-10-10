@@ -17,14 +17,14 @@ public class CacheProviderTests {
     private CacheProvider cacheProvider;
 
     @Test
-    public void getAvailableCaches_cacheAvailable() {
+    public void testGetAvailableCaches() {
         int size = cacheProvider.getAvailableCaches().size();
 
         assertTrue(size > 0);
     }
 
     @Test
-    public void getClientCache_testValues_vaulesPutInCache() {
+    public void testGetClientCacheWithTestValuesAndPutValuesInCache() {
         final String key = "test_key";
         final String value = "test_value";
 

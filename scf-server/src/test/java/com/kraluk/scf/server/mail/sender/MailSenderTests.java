@@ -18,7 +18,7 @@ public class MailSenderTests {
     private MailSender mailSender;
 
     @Test
-    public void send_dummyValues_sended() {
+    public void testSendWithDummyValues() {
         mailSender.send("", "", "");
     }
 }
