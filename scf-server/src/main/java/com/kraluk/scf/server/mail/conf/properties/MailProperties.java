@@ -33,6 +33,8 @@ public class MailProperties {
 
     private boolean debug;
 
+    private String title;
+
     @NotNull
     private Smtp smtp;
 

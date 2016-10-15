@@ -2,6 +2,7 @@ package com.kraluk.scf.server.rest;
 
 import com.google.common.base.Throwables;
 import com.kraluk.scf.server.mail.MailContentProducer;
+import com.kraluk.scf.server.mail.conf.properties.MailProperties;
 import com.kraluk.scf.server.mail.sender.MailSender;
 import com.kraluk.scf.server.model.BaseResponse;
 import com.kraluk.scf.server.model.enums.OperationStatus;
@@ -13,11 +14,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -37,9 +41,14 @@ public class FacadeController {
 
     private final MailContentProducer contentProducer;
 
+    @Value("${mail.title}")
+    private String title;
+
+    private final HttpServletRequest servletRequest;
+
     @RequestMapping(value = "/mail/{to}/{message}", method = GET)
-    public ResponseEntity<BaseResponse> sendMail(@PathVariable("to") String to,
-                                                 @PathVariable("message") String message) {
+    public ResponseEntity<BaseResponse> sendMail(@PathVariable(name = "to") String to,
+                                                 @PathVariable(name = "message") String message) {
         BaseResponse response;
 
         if (!EmailValidator.validate(to)) {
@@ -51,22 +60,24 @@ public class FacadeController {
         log.debug("Preparing to send a Mail Message to '{}'...", to);
 
         try {
-            String content = contentProducer.getContent("", message);
-            mailSender.send(to, "Make Things Groovy Workshops!", content);
+            String user = servletRequest.getRemoteAddr();
+            String content = contentProducer.getContent(user, message);
 
-            response = new BaseResponse(OperationStatus.SUCCESS, "Mail sended!");
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            mailSender.send(to, title, content);
         } catch (Exception e) {
             log.error("Something went badly wrong during sending a Mail Message!", e);
             response =
                 new BaseResponse(OperationStatus.ERROR, Throwables.getRootCause(e).getMessage());
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+        response = new BaseResponse(OperationStatus.SUCCESS, "Mail sended!");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sms/{to}/{message}", method = GET)
-    public ResponseEntity<BaseResponse> sendSms(@PathVariable("to") String to,
-                                                @PathVariable("message") String message) {
+    public ResponseEntity<BaseResponse> sendSms(@PathVariable(name = "to") String to,
+                                                @PathVariable(name = "message") String message) {
         BaseResponse response;
 
         if (!PhoneNumberValidator.validate(to)) {
@@ -79,14 +90,14 @@ public class FacadeController {
 
         try {
             smsSender.send(to, message);
-
-            response = new BaseResponse(OperationStatus.SUCCESS, "SMS sended successfully.");
-            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Something went badly wrong during sending a Text Message!", e);
             response =
                 new BaseResponse(OperationStatus.ERROR, Throwables.getRootCause(e).getMessage());
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+        response = new BaseResponse(OperationStatus.SUCCESS, "SMS sended successfully.");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

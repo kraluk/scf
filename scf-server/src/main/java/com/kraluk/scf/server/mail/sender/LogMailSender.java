@@ -23,5 +23,6 @@ public class LogMailSender implements MailSender {
     @Override
     public void send(String to, String subject, String content) {
         log.info("Sending mail to '{}' with title '{}' and content '{}'...", to, subject, content);
+        log.info("Message sended successfully.");
     }
 }

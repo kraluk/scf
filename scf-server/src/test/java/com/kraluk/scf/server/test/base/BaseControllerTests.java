@@ -2,6 +2,7 @@ package com.kraluk.scf.server.test.base;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.kraluk.scf.server.core.filter.RateLimiterFilter;
+import com.kraluk.scf.server.mail.MailContentProducer;
 import com.kraluk.scf.server.mail.sender.MailSender;
 import com.kraluk.scf.server.sms.sender.SmsSender;
 
@@ -37,6 +38,9 @@ public abstract class BaseControllerTests {
 
     @MockBean
     protected SmsSender smsSender;
+
+    @MockBean
+    protected MailContentProducer mailContentProducer;
 
     @Before
     public void setUp() {

@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebFilter(urlPatterns = "/*")
 @Slf4j
 public class RateLimiterFilter implements Filter {
-    private static final int RATE_LIMIT = 1;
+    private static final int RATE_LIMIT = 2;
 
     private final Map<String, RateLimiter> cache;
 

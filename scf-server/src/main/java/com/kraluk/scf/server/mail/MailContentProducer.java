@@ -34,7 +34,7 @@ public class MailContentProducer {
     }
 
     private static class Variable {
-        public static final String USER = "user";
-        public static final String MESSAGE = "message";
+        static final String USER = "user";
+        static final String MESSAGE = "message";
     }
 }

@@ -23,6 +23,7 @@ public class LogSmsSender implements SmsSender {
     @Override
     public String send(String to, String content) {
         log.info("Sending SMS to '{}' with content '{}'...", to, content);
+        log.info("Message sended successfully.");
         return "MESSAGE SENT";
     }
 }
