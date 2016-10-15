@@ -57,6 +57,8 @@ subprojects {
         mavenCentral()
         jcenter()
 
+        maven { url 'http://labs.smsapi.com/maven/' }
+
         mavenLocal()
     }
 }

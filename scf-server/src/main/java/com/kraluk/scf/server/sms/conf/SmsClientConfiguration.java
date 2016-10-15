@@ -1,12 +1,13 @@
 package com.kraluk.scf.server.sms.conf;
 
+import com.kraluk.scf.server.core.exception.ScfRuntimeException;
 import com.kraluk.scf.server.sms.conf.properties.SmsClientProperties;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
+
+import pl.smsapi.Client;
+import pl.smsapi.api.SmsFactory;
 
 /**
  * SMS Gateway REST Client Configuration
@@ -17,9 +18,17 @@ import org.springframework.web.client.RestTemplate;
 public class SmsClientConfiguration {
 
     @Bean
-    @Qualifier("smsClient")
-    public RestTemplate restTemplate(RestTemplateBuilder builder,
-                                     SmsClientProperties smsClientProperties) {
-        return builder.build();
+    public SmsFactory smsFactory(SmsClientProperties smsClientProperties) {
+        SmsFactory smsFactory;
+
+        try {
+            Client client = new Client(smsClientProperties.getUsername());
+            client.setPasswordHash(smsClientProperties.getPassword());
+
+            smsFactory = new SmsFactory(client);
+            return smsFactory;
+        } catch (Exception e) {
+            throw new ScfRuntimeException("Unable to create SmsFactory!", e);
+        }
     }
 }

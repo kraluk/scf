@@ -3,7 +3,7 @@ package com.kraluk.scf.server.rest;
 import com.kraluk.scf.server.mail.sender.MailSender;
 import com.kraluk.scf.server.model.BaseResponse;
 import com.kraluk.scf.server.model.enums.OperationStatus;
-import com.kraluk.scf.server.sms.SmsService;
+import com.kraluk.scf.server.sms.sender.SmsSender;
 import com.kraluk.scf.server.util.validator.EmailValidator;
 import com.kraluk.scf.server.util.validator.PhoneNumberValidator;
 
@@ -31,7 +31,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class FacadeController {
 
     private final MailSender mailSender;
-    private final SmsService smsService;
+    private final SmsSender smsSender;
 
     @RequestMapping(value = "/mail/{to}/{message}", method = GET)
     public ResponseEntity<BaseResponse> sendMail(@PathVariable("to") String to,

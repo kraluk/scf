@@ -1,5 +1,7 @@
 package com.kraluk.scf.server.sms;
 
+import com.kraluk.scf.server.sms.sender.SmsSender;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +12,13 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SmsServiceTests {
+public class SmsSenderTests {
 
     @Autowired
-    private SmsService smsService;
+    private SmsSender smsSender;
 
     @Test
     public void testNothing() {
-        assertTrue(smsService != null);
+        assertTrue(smsSender != null);
     }
 }

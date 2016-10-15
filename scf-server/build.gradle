@@ -62,6 +62,7 @@ dependencies {
     optional group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
 
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    compile group: 'pl.smsapi', name: 'smsapi-lib', version: '2.2'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
 
