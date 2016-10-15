@@ -49,6 +49,10 @@ buildConfig {
     clsName = 'Version'
 }
 
+bootRun {
+    systemProperties = System.properties
+}
+
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'

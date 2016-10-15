@@ -7,5 +7,5 @@ package com.kraluk.scf.server.sms.sender;
  */
 public interface SmsSender {
 
-    void send(String to, String subject, String content);
+    String send(String to, String content);
 }

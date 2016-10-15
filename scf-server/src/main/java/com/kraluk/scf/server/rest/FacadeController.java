@@ -1,5 +1,7 @@
 package com.kraluk.scf.server.rest;
 
+import com.google.common.base.Throwables;
+import com.kraluk.scf.server.mail.MailContentProducer;
 import com.kraluk.scf.server.mail.sender.MailSender;
 import com.kraluk.scf.server.model.BaseResponse;
 import com.kraluk.scf.server.model.enums.OperationStatus;
@@ -33,6 +35,8 @@ public class FacadeController {
     private final MailSender mailSender;
     private final SmsSender smsSender;
 
+    private final MailContentProducer contentProducer;
+
     @RequestMapping(value = "/mail/{to}/{message}", method = GET)
     public ResponseEntity<BaseResponse> sendMail(@PathVariable("to") String to,
                                                  @PathVariable("message") String message) {
@@ -45,9 +49,19 @@ public class FacadeController {
         }
 
         log.debug("Preparing to send a Mail Message to '{}'...", to);
-        response = new BaseResponse(OperationStatus.SUCCESS, "Mail sended!");
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        try {
+            String content = contentProducer.getContent("", message);
+            mailSender.send(to, "Make Things Groovy Workshops!", content);
+
+            response = new BaseResponse(OperationStatus.SUCCESS, "Mail sended!");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Something went badly wrong during sending a Mail Message!", e);
+            response =
+                new BaseResponse(OperationStatus.ERROR, Throwables.getRootCause(e).getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "/sms/{to}/{message}", method = GET)
@@ -62,8 +76,17 @@ public class FacadeController {
         }
 
         log.debug("Preparing to send a Text Message to '{}'...", to);
-        response = new BaseResponse(OperationStatus.SUCCESS, "SMS sended!");
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        try {
+            smsSender.send(to, message);
+
+            response = new BaseResponse(OperationStatus.SUCCESS, "SMS sended successfully.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Something went badly wrong during sending a Text Message!", e);
+            response =
+                new BaseResponse(OperationStatus.ERROR, Throwables.getRootCause(e).getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

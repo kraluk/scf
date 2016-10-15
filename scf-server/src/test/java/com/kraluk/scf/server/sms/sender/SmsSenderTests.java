@@ -1,6 +1,4 @@
-package com.kraluk.scf.server.sms;
-
-import com.kraluk.scf.server.sms.sender.SmsSender;
+package com.kraluk.scf.server.sms.sender;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

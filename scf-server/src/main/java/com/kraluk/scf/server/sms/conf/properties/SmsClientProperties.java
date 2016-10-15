@@ -17,9 +17,8 @@ import org.springframework.context.annotation.Configuration;
 public class SmsClientProperties {
 
     @NotBlank
-    private String host;
-
     private String username;
 
+    @NotBlank
     private String password;
 }

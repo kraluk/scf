@@ -21,7 +21,8 @@ import static com.kraluk.scf.server.util.ApplicationProfile.TEST;
 public class LogSmsSender implements SmsSender {
 
     @Override
-    public void send(String to, String subject, String content) {
-        log.info("Sending mail to '{}' with title '{}' and content '{}'...", to, subject, content);
+    public String send(String to, String content) {
+        log.info("Sending SMS to '{}' with content '{}'...", to, content);
+        return "MESSAGE SENT";
     }
 }

@@ -3,7 +3,7 @@ package com.kraluk.scf.server.test.base;
 import com.google.common.util.concurrent.RateLimiter;
 import com.kraluk.scf.server.core.filter.RateLimiterFilter;
 import com.kraluk.scf.server.mail.sender.MailSender;
-import com.kraluk.scf.server.sms.SmsService;
+import com.kraluk.scf.server.sms.sender.SmsSender;
 
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +36,7 @@ public abstract class BaseControllerTests {
     protected MailSender mailSender;
 
     @MockBean
-    protected SmsService smsService;
+    protected SmsSender smsSender;
 
     @Before
     public void setUp() {
