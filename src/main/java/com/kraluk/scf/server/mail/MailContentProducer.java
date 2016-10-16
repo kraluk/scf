@@ -1,5 +1,7 @@
 package com.kraluk.scf.server.mail;
 
+import com.kraluk.scf.server.mail.conf.properties.MailProperties;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +24,7 @@ public class MailContentProducer {
     private static final String TEMPLATE_NAME = "mailTemplate";
 
     private final TemplateEngine templateEngine;
+    private final MailProperties mailProperties;
 
     public String getContent(String user, String message) {
         Context context = new Context();
@@ -33,8 +36,12 @@ public class MailContentProducer {
         return content;
     }
 
+    public String getDefaultTitle() {
+        return mailProperties.getTitle();
+    }
+
     private static class Variable {
-        static final String USER = "user";
-        static final String MESSAGE = "message";
+        private static final String USER = "user";
+        private static final String MESSAGE = "message";
     }
 }

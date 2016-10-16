@@ -2,7 +2,6 @@ package com.kraluk.scf.server.rest;
 
 import com.google.common.base.Throwables;
 import com.kraluk.scf.server.mail.MailContentProducer;
-import com.kraluk.scf.server.mail.conf.properties.MailProperties;
 import com.kraluk.scf.server.mail.sender.MailSender;
 import com.kraluk.scf.server.model.BaseResponse;
 import com.kraluk.scf.server.model.enums.OperationStatus;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,9 +39,6 @@ public class FacadeController {
 
     private final MailContentProducer contentProducer;
 
-    @Value("${mail.title}")
-    private String title;
-
     private final HttpServletRequest servletRequest;
 
     @RequestMapping(value = "/mail/{to}/{message}", method = GET)
@@ -62,6 +57,7 @@ public class FacadeController {
         try {
             String user = servletRequest.getRemoteAddr();
             String content = contentProducer.getContent(user, message);
+            String title = contentProducer.getDefaultTitle();
 
             mailSender.send(to, title, content);
         } catch (Exception e) {

@@ -1,12 +1,19 @@
 buildscript {
 
     dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.4.1.RELEASE'
+        classpath group: 'org.springframework.build.gradle', name: 'propdeps-plugin', version: '0.0.7'
+
+        classpath group: 'gradle.plugin.de.fuerstenau', name: 'BuildConfigPlugin', version: '1.1.4'
         classpath group: 'pl.allegro.tech.build', name: 'axion-release-plugin', version: '1.4.0'
     }
 
     repositories {
         jcenter()
         mavenCentral()
+
+        maven { url 'http://repo.spring.io/plugins-release' }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 }
 
@@ -14,54 +21,98 @@ ext {
     springBootVersion = "1.4.0.RELEASE"
 }
 
-allprojects {
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'jacoco'
 
-    apply plugin: 'idea'
-    apply plugin: 'jacoco'
-    apply plugin: 'pl.allegro.tech.build.axion-release'
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-maven'
+apply plugin: 'propdeps-idea'
 
-    group = 'com.kraluk.scf'
-    project.version = scmVersion.version
+apply plugin: 'de.fuerstenau.buildconfig'
+apply plugin: 'pl.allegro.tech.build.axion-release'
 
-    scmVersion {
-        tag {
-            prefix = 'scf'
-        }
-    }
+group = 'com.kraluk.scf'
+project.version = scmVersion.version
 
-    buildscript {
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-        repositories {
-            jcenter()
-            mavenCentral()
-        }
-    }
-
-    idea {
-        module {
-            inheritOutputDirs = false
-            outputDir = file("$buildDir/classes/main")
-        }
+scmVersion {
+    tag {
+        prefix = 'scf'
     }
 }
 
-subprojects {
+repositories {
+    mavenCentral()
+    jcenter()
 
-    apply plugin: "java"
-    apply plugin: "idea"
+    maven { url 'http://labs.smsapi.com/maven/' }
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    mavenLocal()
+}
 
-    repositories {
-        mavenCentral()
-        jcenter()
-
-        maven { url 'http://labs.smsapi.com/maven/' }
-
-        mavenLocal()
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main")
     }
 }
+
+jar {
+    baseName = 'scf'
+
+    manifest {
+        attributes("Specification-Title": "scf",
+                "Specification-Version": scmVersion.version,
+                "Implementation-Title": "scf",
+                "Implementation-Version": scmVersion.version)
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled = true
+    }
+}
+
+buildConfig {
+    appName = project.name
+    version = project.version
+
+    packageName = 'com.kraluk.scf.server.util'
+    clsName = 'Version'
+}
+
+bootRun {
+    systemProperties = System.properties
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+    optional group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
+
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    compile group: 'pl.smsapi', name: 'smsapi-lib', version: '2.2'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
+
+compileJava.dependsOn(processResources)
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.1'

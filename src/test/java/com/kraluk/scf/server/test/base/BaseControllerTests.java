@@ -1,7 +1,6 @@
 package com.kraluk.scf.server.test.base;
 
 import com.google.common.util.concurrent.RateLimiter;
-import com.kraluk.scf.server.core.filter.RateLimiterFilter;
 import com.kraluk.scf.server.mail.MailContentProducer;
 import com.kraluk.scf.server.mail.sender.MailSender;
 import com.kraluk.scf.server.sms.sender.SmsSender;
@@ -18,10 +17,10 @@ import static org.mockito.Mockito.when;
 /**
  * Base for any REST Controller test.
  * <br/>
- * Mocks rate limiter cache related with {@link RateLimiterFilter}, which is required (as a Servlet Filter) by WebMvcTests
+ * Mocks rate limiter cache related with {@link com.kraluk.scf.server.core.filter.RateLimiterFilter}, which is required (as a Servlet Filter) by WebMvcTests
  *
  * @author lukasz
- * @see RateLimiterFilter
+ * @see com.kraluk.scf.server.core.filter.RateLimiterFilter
  * @see org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
  */
 public abstract class BaseControllerTests {
