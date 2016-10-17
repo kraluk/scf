@@ -1,6 +1,7 @@
 package com.kraluk.scf.server.mail;
 
 import com.kraluk.scf.server.mail.conf.properties.MailProperties;
+import com.kraluk.scf.server.util.ApplicationConstant;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ public class MailContentProducer {
         Context context = new Context();
         context.setVariable(Variable.USER, user);
         context.setVariable(Variable.MESSAGE, message);
+        context.setLocale(ApplicationConstant.DEFAULT_LOCALE);
 
         String content = templateEngine.process(TEMPLATE_NAME, context);
 

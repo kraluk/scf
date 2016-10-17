@@ -10,15 +10,20 @@
         <td height="50" align="center">
             <img src="http://makethingskrakow.pl/wp-content/uploads/2016/09/logo-1.png" alt="logo"/>
         </td>
-    </tr>SCF
+    </tr>
     <tr bgcolor="ffffff">
         <td height="100" align="center"><h2>Drogi <strong th:text="${user}">user!</strong></h2></td>
     </tr>
     <tr bgcolor="ffffff">
         <td height="100" align="center">
-            <h3>O to Twoja wiadomość wysłana z warsztatów:</h3>
+            <h3>O to Twoja wiadomość wysłana z warsztatów z programowania w Groovy'm:</h3>
             <br/>
             <p th:text="${message}">message</p>
+        </td>
+    </tr>
+    <tr bgcolor="ffffff">
+        <td height="100" align="right">
+            <p th:text="${#dates.format(#dates.createNow(), 'dd-MM-yyyy HH:mm')}">date</p>
         </td>
     </tr>
 </table>

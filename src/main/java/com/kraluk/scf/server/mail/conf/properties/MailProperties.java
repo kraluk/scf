@@ -44,5 +44,7 @@ public class MailProperties {
         private boolean auth;
 
         private boolean startTlsEnable;
+
+        private String socketFactory;
     }
 }
