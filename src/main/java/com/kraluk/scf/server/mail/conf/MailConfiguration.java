@@ -10,14 +10,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-import static com.kraluk.scf.server.mail.conf.MailConfiguration.PropertyKeys.AUTH;
-import static com.kraluk.scf.server.mail.conf.MailConfiguration.PropertyKeys.CHARSET;
-import static com.kraluk.scf.server.mail.conf.MailConfiguration.PropertyKeys.DEBUG;
-import static com.kraluk.scf.server.mail.conf.MailConfiguration.PropertyKeys.PROTOCOL;
-import static com.kraluk.scf.server.mail.conf.MailConfiguration.PropertyKeys.SOCKET_FACTORY_CLASS;
-import static com.kraluk.scf.server.mail.conf.MailConfiguration.PropertyKeys.SOCKET_FACTORY_PORT;
-import static com.kraluk.scf.server.mail.conf.MailConfiguration.PropertyKeys.TLS;
-
 /**
  * JavaMail Client Configuration
  *
@@ -38,26 +30,26 @@ public class MailConfiguration {
 
         Properties properties = new Properties();
 
-        properties.put(PROTOCOL, mailProperties.getProtocol());
-        properties.put(AUTH, mailProperties.getSmtp().isAuth());
-        properties.put(TLS, mailProperties.getSmtp().isStartTlsEnable());
-        properties.put(SOCKET_FACTORY_PORT, mailProperties.getPort());
-        properties.put(SOCKET_FACTORY_CLASS, mailProperties.getSmtp().getSocketFactory());
-        properties.put(CHARSET, ApplicationConstant.DEFAULT_ENCODING);
-        properties.put(DEBUG, mailProperties.isDebug());
+        properties.put(PropertyKeys.PROTOCOL, mailProperties.getProtocol());
+        properties.put(PropertyKeys.AUTH, mailProperties.getSmtp().isAuth());
+        properties.put(PropertyKeys.TLS, mailProperties.getSmtp().isStartTlsEnable());
+        properties.put(PropertyKeys.SOCKET_FACTORY_PORT, mailProperties.getPort());
+        properties.put(PropertyKeys.SOCKET_FACTORY_CLASS, mailProperties.getSmtp().getSocketFactory());
+        properties.put(PropertyKeys.CHARSET, ApplicationConstant.DEFAULT_ENCODING);
+        properties.put(PropertyKeys.DEBUG, mailProperties.isDebug());
 
         sender.setJavaMailProperties(properties);
 
         return sender;
     }
 
-    protected static class PropertyKeys {
-        public static final String PROTOCOL = "mail.transport.protocol";
-        public static final String AUTH = "mail.smtp.auth";
-        public static final String TLS = "mail.smtp.starttls.enable";
-        public static final String DEBUG = "mail.debug";
-        public static final String CHARSET = "mail.mime.charset";
-        public static final String SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
-        public static final String SOCKET_FACTORY_CLASS = "mail.smtp.socketFactory.class";
+    private static class PropertyKeys {
+        private static final String PROTOCOL = "mail.transport.protocol";
+        private static final String AUTH = "mail.smtp.auth";
+        private static final String TLS = "mail.smtp.starttls.enable";
+        private static final String DEBUG = "mail.debug";
+        private static final String CHARSET = "mail.mime.charset";
+        private static final String SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
+        private static final String SOCKET_FACTORY_CLASS = "mail.smtp.socketFactory.class";
     }
 }

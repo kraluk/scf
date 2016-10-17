@@ -52,7 +52,7 @@ public class FacadeController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
-        log.debug("Preparing to send a Mail Message to '{}'...", to);
+        log.info("Attempting to invoke mail sending request...");
 
         try {
             String user = servletRequest.getRemoteAddr();
@@ -67,6 +67,7 @@ public class FacadeController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+        log.info("Request proceeded successfully.");
         response = new BaseResponse(OperationStatus.SUCCESS, "Mail sended!");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -82,7 +83,7 @@ public class FacadeController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
-        log.debug("Preparing to send a Text Message to '{}'...", to);
+        log.info("Attempting to proceed SMS sending request...");
 
         try {
             smsSender.send(to, message);
@@ -93,6 +94,7 @@ public class FacadeController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+        log.info("Request proceeded successfully.");
         response = new BaseResponse(OperationStatus.SUCCESS, "SMS sended successfully.");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

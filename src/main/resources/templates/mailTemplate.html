@@ -22,8 +22,13 @@
         </td>
     </tr>
     <tr bgcolor="ffffff">
-        <td height="100" align="right">
-            <p th:text="${#dates.format(#dates.createNow(), 'dd-MM-yyyy HH:mm')}">date</p>
+        <td height="100" align="right" style="font-weight: bold; font-size: xx-small">
+            <br/>
+            <span th:text="${#dates.format(#dates.createNow(), 'dd-MM-yyyy HH:mm')}">date</span>
+            <br/>
+            <span th:text="${version}">version</span>
+            <br/>
+            <span th:text="${id}">id</span>
         </td>
     </tr>
 </table>
