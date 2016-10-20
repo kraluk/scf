@@ -40,10 +40,7 @@ public class SmsApiSender implements SmsSender {
             log.info("Attempting to send a message to '{}'", to);
 
             String text = String.format(SMS_TEMPLATE, content);
-
-            if (text.length() > SMS_SIZE_LIMIT) {
-                throw new ScfRuntimeException("Exceeded character limit (160) per message!");
-            }
+            checkMessageSize(text);
 
             SMSSend action = smsFactory.actionSend()
                 .setText(text)
