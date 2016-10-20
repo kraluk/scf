@@ -30,8 +30,6 @@ public class SmsApiSender implements SmsSender {
     private static final String SMS_TYPE = "ECO";
     private static final String SMS_TEMPLATE = "[MakeThings] %s";
 
-    private static final int SMS_SIZE_LIMIT = 160;
-
     private final SmsFactory smsFactory;
 
     @Override
