@@ -28,6 +28,7 @@ import static com.kraluk.scf.server.util.ApplicationProfile.PRODUCTION;
 @Slf4j
 public class SmsApiSender implements SmsSender {
     private static final String SMS_TYPE = "ECO";
+    private static final String SMS_TEMPLATE = "[MakeThings] %s";
 
     private final SmsFactory smsFactory;
 
@@ -36,8 +37,10 @@ public class SmsApiSender implements SmsSender {
         try {
             log.info("Attempting to send a message to '{}'", to);
 
+            String text = String.format(SMS_TEMPLATE, content);
+
             SMSSend action = smsFactory.actionSend()
-                .setText(content)
+                .setText(text)
                 .setTo(to)
                 .setSender(SMS_TYPE);
 
