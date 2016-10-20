@@ -30,6 +30,8 @@ public class SmsApiSender implements SmsSender {
     private static final String SMS_TYPE = "ECO";
     private static final String SMS_TEMPLATE = "[MakeThings] %s";
 
+    private static final int SMS_SIZE_LIMIT = 160;
+
     private final SmsFactory smsFactory;
 
     @Override
@@ -38,6 +40,10 @@ public class SmsApiSender implements SmsSender {
             log.info("Attempting to send a message to '{}'", to);
 
             String text = String.format(SMS_TEMPLATE, content);
+
+            if (text.length() > SMS_SIZE_LIMIT) {
+                throw new ScfRuntimeException("Exceeded character limit (160) per message!");
+            }
 
             SMSSend action = smsFactory.actionSend()
                 .setText(text)
