@@ -1,11 +1,11 @@
 buildscript {
 
     dependencies {
-        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.4.1.RELEASE'
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.4.6.RELEASE'
         classpath group: 'org.springframework.build.gradle', name: 'propdeps-plugin', version: '0.0.7'
 
         classpath group: 'gradle.plugin.de.fuerstenau', name: 'BuildConfigPlugin', version: '1.1.4'
-        classpath group: 'pl.allegro.tech.build', name: 'axion-release-plugin', version: '1.4.0'
+        classpath group: 'pl.allegro.tech.build', name: 'axion-release-plugin', version: '1.6.0'
     }
 
     repositories {
@@ -17,14 +17,10 @@ buildscript {
     }
 }
 
-ext {
-    springBootVersion = "1.4.0.RELEASE"
-}
-
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'jacoco'
 
 apply plugin: 'propdeps'
@@ -37,8 +33,8 @@ apply plugin: 'pl.allegro.tech.build.axion-release'
 group = 'com.kraluk.scf'
 project.version = scmVersion.version
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 scmVersion {
     tag {
@@ -75,7 +71,7 @@ jar {
 
 jacocoTestReport {
     reports {
-        xml.enabled true
+        xml.enabled = true
         html.enabled = true
     }
 }
@@ -104,16 +100,23 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
     optional group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
 
-    compile group: 'com.google.guava', name: 'guava', version: '19.0'
-    compile group: 'pl.smsapi', name: 'smsapi-lib', version: '2.2'
+    compile group: 'com.google.guava', name: 'guava', version: '22.0'
+    compile group: 'pl.smsapi', name: 'smsapi-lib', version: '2.3'
 
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
+
+test {
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat = 'full'
+    }
 }
 
 compileJava.dependsOn(processResources)
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.1'
+    gradleVersion = '3.5'
 }

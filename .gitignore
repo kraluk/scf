@@ -21,6 +21,7 @@ hs_err_pid*
 
 # Intellij specifics
 .idea/
+out/
 *.iml
 *.iws
 
@@ -35,6 +36,3 @@ target/
 build/
 .gradletasknamecache
 !gradle/wrapper/gradle-wrapper.jar
-
-# App specifics
-application.properties
