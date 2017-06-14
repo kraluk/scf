@@ -1,11 +1,12 @@
 buildscript {
 
     dependencies {
-        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.5.3.RELEASE'
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.5.4.RELEASE'
         classpath group: 'org.springframework.build.gradle', name: 'propdeps-plugin', version: '0.0.7'
 
         classpath group: 'gradle.plugin.de.fuerstenau', name: 'BuildConfigPlugin', version: '1.1.4'
         classpath group: 'pl.allegro.tech.build', name: 'axion-release-plugin', version: '1.6.0'
+        classpath group: 'com.ofg', name: 'uptodate-gradle-plugin', version: '1.6.3'
     }
 
     repositories {
@@ -29,6 +30,7 @@ apply plugin: 'propdeps-idea'
 
 apply plugin: 'de.fuerstenau.buildconfig'
 apply plugin: 'pl.allegro.tech.build.axion-release'
+apply plugin: 'com.ofg.uptodate'
 
 group = 'com.kraluk.scf'
 project.version = scmVersion.version
@@ -53,8 +55,8 @@ repositories {
 
 idea {
     module {
-        inheritOutputDirs = false
-        outputDir = file("$buildDir/classes/main")
+        downloadJavadoc = true
+        downloadSources = true
     }
 }
 
@@ -88,6 +90,12 @@ bootRun {
     systemProperties = System.properties
 }
 
+uptodate {
+    connectionTimeout = 10000
+}
+
+check.dependsOn 'uptodate'
+
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
@@ -118,5 +126,5 @@ test {
 compileJava.dependsOn(processResources)
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.5'
+    gradleVersion = '4.0'
 }
